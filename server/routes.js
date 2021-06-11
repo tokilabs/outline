@@ -12,6 +12,7 @@ import apexRedirect from "./middlewares/apexRedirect";
 import { opensearchResponse } from "./utils/opensearch";
 import prefetchTags from "./utils/prefetchTags";
 import { robotsResponse } from "./utils/robots";
+import metaTags from "./utils/metaTags";
 
 const isProduction = process.env.NODE_ENV === "production";
 const koa = new Koa();
@@ -51,6 +52,7 @@ const renderApp = async (ctx, next) => {
   ctx.body = page
     .toString()
     .replace(/\/\/inject-env\/\//g, environment)
+    .replace(/\/\/inject-meta-tags\/\//g, metaTags)
     .replace(/\/\/inject-prefetch\/\//g, prefetchTags)
     .replace(/\/\/inject-slack-app-id\/\//g, process.env.SLACK_APP_ID || "");
 };

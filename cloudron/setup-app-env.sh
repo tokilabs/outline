@@ -147,6 +147,11 @@ SMTP_REPLY_EMAIL=
 # available language codes and their rough percentage translated.
 DEFAULT_LANGUAGE=en_US
 
+# Site name and description (optional)
+# these will be added to meta tags
+SITE_NAME=
+SITE_DESCRIPTION=
+
 echo "Setting $APP_DOMAIN env"
 
 cloudron env set --app $APP_DOMAIN \
@@ -186,7 +191,9 @@ SMTP_USERNAME=$SMTP_USERNAME \
 SMTP_PASSWORD=$SMTP_PASSWORD \
 SMTP_FROM_EMAIL=$SMTP_FROM_EMAIL \
 SMTP_REPLY_EMAIL=$SMTP_REPLY_EMAIL \
-DEFAULT_LANGUAGE=$DEFAULT_LANGUAGE
+DEFAULT_LANGUAGE=$DEFAULT_LANGUAGE \
+SITE_NAME=$SITE_NAME \
+SITE_DESCRIPTION=$SITE_DESCRIPTION
 
 echo "Done"
 echo "use `cloudron env list --app $APP` to check the app environment"
