@@ -40,7 +40,7 @@ const readIndexFile = async (ctx) => {
   });
 };
 
-const renderApp = async (ctx, next) => {
+const renderApp = async (ctx, next, title = null) => {
   if (ctx.request.path === "/realtime/") {
     return next();
   }
@@ -49,10 +49,11 @@ const renderApp = async (ctx, next) => {
   const environment = `
     window.env = ${JSON.stringify(env)};
   `;
+
   ctx.body = page
     .toString()
     .replace(/\/\/inject-env\/\//g, environment)
-    .replace(/\/\/inject-meta-tags\/\//g, metaTags)
+    .replace(/\/\/inject-meta-tags\/\//g, metaTags(title))
     .replace(/\/\/inject-prefetch\/\//g, prefetchTags)
     .replace(/\/\/inject-slack-app-id\/\//g, process.env.SLACK_APP_ID || "");
 };
